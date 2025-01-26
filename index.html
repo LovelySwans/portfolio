@@ -14,16 +14,20 @@
 
     body {
       font-family: "Roboto", sans-serif;
-      height: 100vh;
-      /* Градієнт, який буде анімуватися */
+      /* Висота на всю сторінку для фону */
+      min-height: 100vh;
+      /* Анімований градієнт */
       background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
 
+      /* Головне центрування по вертикалі та горизонталі */
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       color: #fff;
+      text-align: center;
+      padding: 20px; /* трохи відступів для мобільних */
     }
 
     @keyframes gradientBG {
@@ -38,11 +42,27 @@
       }
     }
 
-    .button-container {
-      text-align: center;
+    .container {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* Стиль самої кнопки */
+    /* Заголовок */
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    /* Опис */
+    p.description {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+
+    /* Кнопка портфоліо */
     .portfolio-button {
       text-decoration: none;
       font-size: 1.5rem;
@@ -52,7 +72,7 @@
       border: 2px solid #ff006e;
       border-radius: 8px;
       transition: all 0.3s ease;
-      /* Ефект неону навколо кнопки */
+      /* Ефект неону */
       box-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e;
     }
 
@@ -62,17 +82,44 @@
       box-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493;
       transform: scale(1.05);
     }
+
+    /* Посилання LinkedIn внизу */
+    .social-link {
+      margin-top: 40px;
+      font-size: 1rem;
+    }
+    .social-link a {
+      color: #fff;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .social-link a:hover {
+      color: #ff006e;
+    }
+
   </style>
 </head>
 <body>
-  <div class="button-container">
+  <div class="container">
+    <h1>Volo Lebid Portfolio</h1>
+    <p class="description">Versatile marketer with achievements in FMCG, Media and Mobile.</p>
     <a 
       class="portfolio-button" 
       href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
       target="_blank"
       rel="noopener noreferrer"
     >
-xxx    </a>
+      See Portfolio
+    </a>
+    <div class="social-link">
+      <a 
+        href="https://www.linkedin.com/in/volo42/" 
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LinkedIn
+      </a>
+    </div>
   </div>
 </body>
 </html>
