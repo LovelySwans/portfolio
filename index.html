@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volo Lebid Marketer's portfolio</title>
+  <style>
+    /* Скидання базових відступів/паддингів */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      height: 100vh;
+      /* Градієнт, який буде анімуватися */
+      background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    /* Стиль самої кнопки */
+    .portfolio-button {
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: #fff;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #ff006e;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      /* Ефект неону навколо кнопки */
+      box-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e;
+    }
+
+    .portfolio-button:hover {
+      background: #ff006e;
+      color: #fff;
+      box-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="button-container">
+    <a 
+      class="portfolio-button" 
+      href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+xxx    </a>
+  </div>
+</body>
+</html>
