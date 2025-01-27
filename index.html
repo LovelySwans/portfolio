@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adjusted Composition</title>
+  <title>Adjusted Composition with Coins</title>
   <link 
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400&display=swap" 
     rel="stylesheet"
@@ -60,35 +60,22 @@
 
     .container {
       max-width: 600px;
-      flex-grow: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: hyperspaceEntry 2s ease;
-      margin-top: 60px; /* Опустити контейнер */
-    }
-
-    .container.exit {
-      animation: hyperspaceExit 2s ease forwards;
+      margin-top: 120px; /* Опустити весь блок на ще 2 розміри кнопки */
     }
 
     h1 {
       font-family: "Orbitron", sans-serif;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      animation: floatText 2s ease-in-out infinite;
-    }
-
-    @keyframes floatText {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      font-size: 3rem; /* Пропорційно збільшено */
+      margin-bottom: 30px; /* Збалансувати відступ від заголовка до опису */
     }
 
     p.description {
       font-size: 1.2rem;
-      margin-bottom: 40px;
+      margin-bottom: 50px; /* Відступ до кнопок */
       line-height: 1.4;
     }
 
@@ -128,8 +115,31 @@
       color: #000;
     }
 
+    /* Обгортка для монеток і кнопки "Suggest Opportunity" */
+    .opportunity-wrapper {
+      position: relative;
+      display: inline-block; /* дозволяє монеткам вирівнюватися з кнопкою */
+      margin-bottom: 20px;
+    }
+
+    .coin-left, .coin-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+    }
+
+    .coin-left {
+      left: -40px; /* Монета зліва */
+    }
+
+    .coin-right {
+      right: -40px; /* Монета справа */
+    }
+
     .social-section {
-      margin-top: -30px; /* Підняти логотипи ближче до основного контенту */
+      margin-top: -20px; /* Підняти лого ближче */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -139,7 +149,7 @@
     .social-icons {
       display: flex;
       gap: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 15px; /* Відступ між лого і текстом */
     }
 
     .social-icons a {
@@ -159,7 +169,7 @@
     }
 
     .cv-link {
-      font-size: 1.2rem; /* Збільшений розмір тексту */
+      font-size: 1.3rem; /* Збільшений розмір тексту */
       text-decoration: underline;
       color: #fff;
       transition: color 0.3s ease;
@@ -171,7 +181,7 @@
 
     @media (max-width: 768px) {
       h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
       .portfolio-button,
       .transparent-button {
@@ -181,6 +191,12 @@
       .breadcrumbs {
         font-size: 0.8rem;
         gap: 5px;
+      }
+      .coin-left {
+        left: -30px;
+      }
+      .coin-right {
+        right: -30px;
       }
     }
   </style>
@@ -209,15 +225,22 @@
       Versatile marketer with success cases in Performance, Media and Mobile
     </p>
 
-    <a 
-      class="transparent-button" 
-      href="https://lovelyswans.github.io/qanda/" 
-      target="_blank"
-      rel="noopener noreferrer"
-      onclick="handleTransition(event, 'https://lovelyswans.github.io/qanda/')"
-    >
-      Suggest Opportunity
-    </a>
+    <!-- Кнопка "Suggest Opportunity" із монетками -->
+    <div class="opportunity-wrapper">
+      <img src="coinn.gif" alt="Left Coin" class="coin-left">
+      <a 
+        class="transparent-button" 
+        href="https://lovelyswans.github.io/qanda/" 
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="handleTransition(event, 'https://lovelyswans.github.io/qanda/')"
+      >
+        Suggest Opportunity
+      </a>
+      <img src="coinn.gif" alt="Right Coin" class="coin-right">
+    </div>
+
+    <!-- Кнопка "See Portfolio" -->
     <a 
       class="portfolio-button" 
       href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
