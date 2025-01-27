@@ -29,8 +29,6 @@
       background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-
-      /* Головне центрування по вертикалі та горизонталі */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -38,6 +36,7 @@
       color: #fff;
       text-align: center;
       padding: 20px; /* трохи відступів для мобільних */
+      overflow: hidden;
     }
 
     @keyframes gradientBG {
@@ -52,11 +51,46 @@
       }
     }
 
+    @keyframes hyperspaceEntry {
+      0% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes hyperspaceExit {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+    }
+
     .container {
       max-width: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      animation: hyperspaceEntry 2s ease;
+    }
+
+    .container.exit {
+      animation: hyperspaceExit 2s ease forwards;
     }
 
     /* Заголовок */
@@ -84,26 +118,6 @@
       margin-bottom: 40px;
       line-height: 1.4;
       position: relative;
-    }
-
-    /* Курсор для тексту */
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      vertical-align: bottom;
-      background-color: #fff;
-      margin-left: 2px;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 50% {
-        opacity: 1;
-      }
-      51%, 100% {
-        opacity: 0;
-      }
     }
 
     /* Кнопка портфоліо */
@@ -146,6 +160,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 20px;
     }
 
     .social-icons {
@@ -180,18 +195,6 @@
     .cv-link:hover {
       color: #ff006e;
     }
-
-    /* Іконка музики */
-    .music-icon {
-      margin-top: 20px;
-      cursor: pointer;
-      width: 30px;
-      height: 30px;
-    }
-
-    .music-icon:hover {
-      transform: scale(1.2);
-    }
   </style>
 </head>
 <body>
@@ -200,16 +203,21 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div class="container">
+  <div class="breadcrumbs">
+    <a href="#">Product</a> / <a href="#">Data Science</a> / <a href="#">Marketing</a> / <a href="#">User Acquisition</a> / <a href="#">Creative</a> / <a href="#">Content</a>
+  </div>
+
+  <div id="container" class="container">
     <h1>Volo Lebid Portfolio</h1>
     <p class="description">
-      Versatile marketer with achievements in FMCG, Media and Mobile<span class="cursor"></span>
+      Versatile marketer with achievements in FMCG, Media and Mobile
     </p>
     <a 
       class="portfolio-button" 
       href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
       target="_blank"
       rel="noopener noreferrer"
+      onclick="exitHyperspace()"
     >
       See Portfolio
     </a>
@@ -218,6 +226,7 @@
       href="https://lovelyswans.github.io/qanda/" 
       target="_blank"
       rel="noopener noreferrer"
+      onclick="exitHyperspace()"
     >
       Suggest Opportunity
     </a>
@@ -239,23 +248,12 @@
     >
       1 Page CV
     </a>
-    <audio id="zelda-music" src="https://example.com/zelda-theme.mp3" preload="auto"></audio>
-    <img 
-      class="music-icon" 
-      src="https://upload.wikimedia.org/wikipedia/commons/6/6a/OOjs_UI_icon_volume-up.svg" 
-      alt="Play Music" 
-      onclick="toggleMusic()"
-    >
   </div>
 
   <script>
-    function toggleMusic() {
-      const music = document.getElementById('zelda-music');
-      if (music.paused) {
-        music.play();
-      } else {
-        music.pause();
-      }
+    function exitHyperspace() {
+      const container = document.getElementById('container');
+      container.classList.add('exit');
     }
   </script>
 </body>
