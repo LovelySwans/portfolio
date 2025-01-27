@@ -1,0 +1,209 @@
+/* Загальні стилі */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Центрування контенту */
+.container {
+  max-width: 500px;
+  text-align: center;
+  margin: auto;
+  animation: hyperspaceEntry 2s ease-in-out forwards;
+  margin-bottom: 50px;
+}
+
+@keyframes hyperspaceEntry {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.exit {
+  animation: hyperspaceExit 2s ease-in-out forwards;
+}
+
+@keyframes hyperspaceExit {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+}
+
+h1 {
+  font-size: 2rem; /* Зменшено шрифт */
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  animation: floatText 2s ease-in-out infinite;
+}
+
+@keyframes floatText {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.description {
+  font-size: 1rem; /* Зменшено шрифт */
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.portfolio-button, .transparent-button {
+  text-decoration: none;
+  font-size: 1rem; /* Зменшено шрифт */
+  color: #fff;
+  padding: 12px 25px; /* Зменшено відступи */
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 8px;
+}
+
+.portfolio-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ff006e;
+  box-shadow: 0 0 8px #ff006e, 0 0 16px #ff006e;
+}
+
+.portfolio-button:hover {
+  background: #ff006e;
+  color: #000;
+  box-shadow: 0 0 16px #ff1493, 0 0 32px #ff1493;
+}
+
+.transparent-button {
+  border-color: #fff;
+  background: transparent;
+}
+
+.transparent-button:hover {
+  background: #fff;
+  color: #000;
+}
+
+.breadcrumbs {
+  position: absolute;
+  top: 10px; /* Піднято вище */
+  left: 10px;
+  font-size: 0.8rem; /* Зменшено шрифт */
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+  color: #ff006e;
+}
+
+/* Монети */
+.coin {
+  width: 30px; /* Розмір монет залишено стандартним */
+  height: 30px;
+}
+
+.coin-left {
+  margin-right: 10px;
+}
+
+.coin-right {
+  margin-left: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+/* Соціальні іконки */
+.social-section {
+  margin-top: 20px;
+  margin-bottom: 30px; /* Зменшено відступи */
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Зменшено відстань між іконками */
+  margin-bottom: 15px;
+}
+
+.social-icons img {
+  width: 30px; /* Зменшено логотипи */
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+.cv-link {
+  font-size: 0.9rem; /* Зменшено шрифт */
+  text-decoration: underline;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.cv-link:hover {
+  color: #ff006e;
+}
