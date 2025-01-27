@@ -253,7 +253,7 @@
       href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
       target="_blank"
       rel="noopener noreferrer"
-      onclick="exitHyperspace()"
+      onclick="handleTransition(event, 'https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link')"
     >
       See Portfolio
     </a>
@@ -262,7 +262,7 @@
       href="https://lovelyswans.github.io/qanda/" 
       target="_blank"
       rel="noopener noreferrer"
-      onclick="exitHyperspace()"
+      onclick="handleTransition(event, 'https://lovelyswans.github.io/qanda/')"
     >
       Suggest Opportunity
     </a>
@@ -287,9 +287,13 @@
   </div>
 
   <script>
-    function exitHyperspace() {
+    function handleTransition(event, url) {
+      event.preventDefault();
       const container = document.getElementById('container');
       container.classList.add('exit');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 2000); // 2 seconds delay for the animation
     }
   </script>
 </body>
