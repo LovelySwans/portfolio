@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Improved Composition with Slower Animation</title>
+  <title>Improved Composition with Matching Animations</title>
   
   <!-- Підключаємо шрифти Orbitron і Roboto -->
   <link 
@@ -79,7 +79,7 @@
         transparent 1px,
         transparent 40px
       );
-      /* Нахил 45deg замість 60deg */
+      /* Нахил 45deg */
       transform: translate(-50%, -50%) rotateX(45deg);
       opacity: 0.5;
     }
@@ -103,12 +103,10 @@
       color: #ff006e;
     }
 
-    /* Контейнер із гіперпросторовою анімацією (сповільнено) */
-    .container {
-      max-width: 600px;
-      margin-top: 80px; /* трішки відступу зверху */
-      animation: hyperspace-entry 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-    }
+    /*
+      Гіперпросторова анімація "входу" (hyperspace-entry)
+      та "виходу" (hyperspace-exit) для контенту
+    */
     @keyframes hyperspace-entry {
       0% {
         transform: scale(0) translateY(0);
@@ -121,11 +119,6 @@
       100% {
         transform: scale(1);
       }
-    }
-
-    /* Анімація при виході (також повільніше) */
-    .exit {
-      animation: hyperspace-exit 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
     }
     @keyframes hyperspace-exit {
       0% {
@@ -144,7 +137,36 @@
       }
     }
 
-    /* Заголовок із плавним "підстрибуанням" */
+    /* Контейнер із гіперпросторовою анімацією (сповільнено) */
+    .container {
+      max-width: 600px;
+      margin-top: 80px; 
+      animation: hyperspace-entry 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    /* Блок кнопок теж з’являється з такою ж анімацією */
+    .buttons-wrapper {
+      position: absolute;
+      bottom: 20%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: hyperspace-entry 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    /*
+      Оскільки ми використовуємо одну й ту ж анімацію при виході,
+      робимо правило, що активується для обох елементів одночасно
+    */
+    #container.exit,
+    .buttons-wrapper.exit {
+      animation: hyperspace-exit 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    /* Заголовок із плавним "підстрибуанням" (без зміни) */
     h1 {
       font-family: "Orbitron", sans-serif;
       font-size: 3rem;
@@ -169,19 +191,7 @@
       line-height: 1.4;
     }
 
-    /* Блок кнопок у нижній частині екрана */
-    .buttons-wrapper {
-      position: absolute;
-      bottom: 20%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    /* Кнопки з пульсацією */
+    /* Кнопки */
     .portfolio-button,
     .transparent-button {
       text-decoration: none;
@@ -192,18 +202,7 @@
       transition: all 0.3s ease;
       border: 2px solid transparent;
       display: inline-block;
-      /* Вимикаємо перенос рядка */
-      white-space: nowrap;
-      /* Легка "пульсація" */
-      animation: pulseButtons 3s ease-in-out infinite;
-    }
-    @keyframes pulseButtons {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
+      white-space: nowrap; /* Щоб не переносило текст кнопки */
     }
 
     /* Стиль для кнопки "See Portfolio" */
@@ -334,11 +333,11 @@
   <div id="container" class="container">
     <h1>Volo Lebid</h1>
     <p class="description">
-      Hire a versatile marketer with success cases in Performance, Media and Mobile
+      Versatile marketer with success cases in Performance, Media and Mobile
     </p>
   </div>
 
-  <!-- Блок кнопок -->
+  <!-- Блок кнопок (також з'являється / зникає) -->
   <div class="buttons-wrapper">
     <div class="opportunity-wrapper">
       <img src="coinn.gif" alt="Left Coin" class="coin-left">
@@ -398,11 +397,19 @@
   <script>
     function handleTransition(event, url) {
       event.preventDefault();
+      
+      // Знаходимо основний контейнер і блок кнопок
       const container = document.getElementById('container');
+      const buttonsWrapper = document.querySelector('.buttons-wrapper');
+      
+      // Додаємо обом клас .exit
       container.classList.add('exit');
+      buttonsWrapper.classList.add('exit');
+
+      // Почекати, поки завершиться анімація (2.4с), потім перейти
       setTimeout(() => {
         window.location.href = url;
-      }, 2400); // 2.4 секунди на анімацію, як у CSS
+      }, 2400);
     }
   </script>
 </body>
