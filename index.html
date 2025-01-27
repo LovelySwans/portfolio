@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mobile Optimized</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+      padding-bottom: calc(60px + env(safe-area-inset-bottom));
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .grid-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle, transparent, rgba(255, 255, 255, 0.1));
+      mask-image: linear-gradient(to top, transparent, black);
+      -webkit-mask-image: linear-gradient(to top, transparent, black);
+    }
+
+    .grid-background::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.2) 0px,
+        rgba(255, 255, 255, 0.2) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.2) 0px,
+        rgba(255, 255, 255, 0.2) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+      transform: translate(-50%, -50%) rotateX(45deg);
+      opacity: 0.5;
+    }
+
+    .breadcrumbs {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
+    .breadcrumbs a {
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumbs a:hover {
+      color: #ff006e;
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 2rem;
+      margin: 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      animation: floatText 2s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    p.description {
+      font-size: 1rem;
+      margin: 10px 0 30px;
+      line-height: 1.4;
+    }
+
+    .buttons-wrapper {
+      position: relative;
+      margin-top: 20px;
+      animation: hyperspace-entry 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    @keyframes hyperspace-entry {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .portfolio-button,
+    .transparent-button {
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin: 10px;
+      border: 2px solid transparent;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .portfolio-button {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #ff006e;
+      box-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e;
+    }
+
+    .portfolio-button:hover {
+      background: #ff006e;
+      color: #000;
+      box-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493;
+    }
+
+    .transparent-button {
+      background: transparent;
+      border-color: #fff;
+    }
+
+    .transparent-button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .coin-left, .coin-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+    }
+
+    .coin-left {
+      left: -50px;
+    }
+
+    .coin-right {
+      right: -50px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p.description {
+        font-size: 0.9rem;
+      }
+
+      .portfolio-button,
+      .transparent-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      .coin-left {
+        left: -40px;
+      }
+
+      .coin-right {
+        right: -40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      p.description {
+        font-size: 0.85rem;
+      }
+
+      .portfolio-button,
+      .transparent-button {
+        font-size: 0.8rem;
+        padding: 6px 14px;
+      }
+
+      .breadcrumbs {
+        font-size: 0.7rem;
+      }
+
+      .coin-left {
+        left: -30px;
+      }
+
+      .coin-right {
+        right: -30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-background"></div>
+  <div class="breadcrumbs">
+    <a href="#">Product</a> / 
+    <a href="#">Data Science</a> / 
+    <a href="#">Marketing</a> / 
+    <a href="#">User Acquisition</a> / 
+    <a href="#">Creative</a>
+  </div>
+
+  <h1>Volo Lebid</h1>
+  <p class="description">
+    Versatile marketer with success cases in Performance, Media and Mobile
+  </p>
+
+  <div class="buttons-wrapper">
+    <div class="opportunity-wrapper">
+      <img src="coinn.gif" alt="Left Coin" class="coin-left">
+      <a class="transparent-button" href="https://lovelyswans.github.io/qanda/">Suggest Opportunity</a>
+      <img src="coinn.gif" alt="Right Coin" class="coin-right">
+    </div>
+    <a class="portfolio-button" href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link">See Portfolio</a>
+  </div>
+</body>
+</html>
