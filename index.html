@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Improved Composition with Animation</title>
+  <title>Improved Composition with Slower Animation</title>
   
   <!-- Підключаємо шрифти Orbitron і Roboto -->
   <link 
@@ -22,9 +22,7 @@
     /* Базовий фон із градієнтом та анімацією */
     body {
       font-family: "Roboto", sans-serif;
-      /* Висота на всю сторінку для фону */
       min-height: 100vh;
-      /* Анімований градієнт */
       background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
@@ -38,7 +36,6 @@
       /* Для безпечного відступу знизу (на моб. з вирізом) */
       padding-bottom: calc(60px + env(safe-area-inset-bottom)); 
       overflow-x: hidden;
-      /* В оригіналі був overflow: hidden; якщо потрібна прокрутка по Y, можна замінити */
       overflow-y: auto;
       position: relative; /* Для сітки */
     }
@@ -82,7 +79,8 @@
         transparent 1px,
         transparent 40px
       );
-      transform: translate(-50%, -50%) rotateX(60deg);
+      /* Нахил 45deg замість 60deg */
+      transform: translate(-50%, -50%) rotateX(45deg);
       opacity: 0.5;
     }
 
@@ -105,11 +103,11 @@
       color: #ff006e;
     }
 
-    /* Контейнер із гіперпросторовою анімацією */
+    /* Контейнер із гіперпросторовою анімацією (сповільнено) */
     .container {
       max-width: 600px;
       margin-top: 80px; /* трішки відступу зверху */
-      animation: hyperspace-entry 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+      animation: hyperspace-entry 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
     }
     @keyframes hyperspace-entry {
       0% {
@@ -125,9 +123,9 @@
       }
     }
 
-    /* Анімація при виході */
+    /* Анімація при виході (також повільніше) */
     .exit {
-      animation: hyperspace-exit 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+      animation: hyperspace-exit 2.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
     }
     @keyframes hyperspace-exit {
       0% {
@@ -171,7 +169,7 @@
       line-height: 1.4;
     }
 
-    /* Кнопки розміщені відносно низу сторінки */
+    /* Блок кнопок у нижній частині екрана */
     .buttons-wrapper {
       position: absolute;
       bottom: 20%;
@@ -183,7 +181,7 @@
       transform: translateX(-50%);
     }
 
-    /* Кнопки */
+    /* Кнопки з пульсацією */
     .portfolio-button,
     .transparent-button {
       text-decoration: none;
@@ -194,6 +192,18 @@
       transition: all 0.3s ease;
       border: 2px solid transparent;
       display: inline-block;
+      /* Вимикаємо перенос рядка */
+      white-space: nowrap;
+      /* Легка "пульсація" */
+      animation: pulseButtons 3s ease-in-out infinite;
+    }
+    @keyframes pulseButtons {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
     }
 
     /* Стиль для кнопки "See Portfolio" */
@@ -223,7 +233,6 @@
       position: relative;
       display: inline-block;
     }
-
     .coin-left, .coin-right {
       position: absolute;
       top: 50%; 
@@ -393,7 +402,7 @@
       container.classList.add('exit');
       setTimeout(() => {
         window.location.href = url;
-      }, 1200); // 1.2 секунди на анімацію
+      }, 2400); // 2.4 секунди на анімацію, як у CSS
     }
   </script>
 </body>
