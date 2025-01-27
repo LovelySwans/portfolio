@@ -12,7 +12,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Volo Lebid Marketer's</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- Підключення шрифту Orbitron (700) -->
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" 
+    rel="stylesheet"
+  >
   <style>
     /* Скидання базових відступів/паддингів */
     * {
@@ -22,10 +26,8 @@
     }
 
     body {
-      font-family: "Roboto", sans-serif;
-      /* Висота на всю сторінку для фону */
+      font-family: "Orbitron", sans-serif;
       min-height: 100vh;
-      /* Анімований градієнт */
       background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
@@ -33,10 +35,15 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      color: #fff;
       text-align: center;
-      padding: 20px; /* трохи відступів для мобільних */
-      overflow: hidden;
+      color: #fff;
+
+      /* Відступи та безпечна зона знизу для мобільних браузерів */
+      padding: 20px;
+      padding-bottom: 60px;
+      padding-bottom: calc(60px + env(safe-area-inset-bottom));
+
+      overflow-x: hidden;
     }
 
     @keyframes gradientBG {
@@ -93,13 +100,10 @@
       animation: hyperspaceExit 2s ease forwards;
     }
 
-    /* Заголовок */
     h1 {
-      font-family: "Press Start 2P", cursive;
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-transform: uppercase;
-      position: relative;
       animation: floatText 2s ease-in-out infinite;
     }
 
@@ -112,15 +116,12 @@
       }
     }
 
-    /* Опис */
     p.description {
       font-size: 1.2rem;
       margin-bottom: 40px;
       line-height: 1.4;
-      position: relative;
     }
 
-    /* Хлібні крихти */
     .breadcrumbs {
       position: absolute;
       top: 20px;
@@ -142,8 +143,9 @@
       color: #ff006e;
     }
 
-    /* Кнопка портфоліо */
-    .portfolio-button, .transparent-button {
+    /* Кнопки */
+    .portfolio-button,
+    .transparent-button {
       text-decoration: none;
       font-size: 1.5rem;
       color: #fff;
@@ -151,6 +153,10 @@
       border-radius: 8px;
       transition: all 0.3s ease;
       border: 2px solid transparent;
+      display: inline-flex;       /* щоб іконки були на одному рядку з текстом */
+      align-items: center;
+      justify-content: center;
+      gap: 8px;                   /* відстань між текстом і монетками */
     }
 
     .portfolio-button {
@@ -176,7 +182,12 @@
       color: #000;
     }
 
-    /* Соціальні іконки */
+    /* Стили для монеток */
+    .coin-icon {
+      width: 24px;
+      height: 24px;
+    }
+
     .social-section {
       margin-top: 40px;
       display: flex;
@@ -222,7 +233,8 @@
       h1 {
         font-size: 1.8rem;
       }
-      .portfolio-button, .transparent-button {
+      .portfolio-button,
+      .transparent-button {
         font-size: 1.2rem;
         padding: 10px 20px;
       }
@@ -235,12 +247,20 @@
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MT7MNXHD"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript>
+    <iframe 
+      src="https://www.googletagmanager.com/ns.html?id=GTM-MT7MNXHD"
+      height="0" width="0" style="display:none;visibility:hidden"
+    ></iframe>
+  </noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   <div class="breadcrumbs">
-    <a href="#">Product</a> / <a href="#">Data Science</a> / <a href="#">Marketing</a> / <a href="#">User Acquisition</a> / <a href="#">Creative</a> 
+    <a href="#">Product</a> / 
+    <a href="#">Data Science</a> / 
+    <a href="#">Marketing</a> / 
+    <a href="#">User Acquisition</a> / 
+    <a href="#">Creative</a>
   </div>
 
   <div id="container" class="container">
@@ -248,6 +268,8 @@
     <p class="description">
       Versatile marketer with success cases in Performance, Media and Mobile
     </p>
+
+    <!-- Кнопка "See Portfolio" -->
     <a 
       class="portfolio-button" 
       href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
@@ -257,6 +279,8 @@
     >
       See Portfolio
     </a>
+
+    <!-- Кнопка "Suggest Opportunity" з монетками -->
     <a 
       class="transparent-button" 
       href="https://lovelyswans.github.io/qanda/" 
@@ -264,16 +288,33 @@
       rel="noopener noreferrer"
       onclick="handleTransition(event, 'https://lovelyswans.github.io/qanda/')"
     >
+      <img src="coinn.gif" alt="Coin" class="coin-icon">
       Suggest Opportunity
+      <img src="coinn.gif" alt="Coin" class="coin-icon">
     </a>
   </div>
+  
   <div class="social-section">
     <div class="social-icons">
-      <a href="https://www.linkedin.com/in/volo42/" target="_blank" rel="noopener noreferrer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+      <a 
+        href="https://www.linkedin.com/in/volo42/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" 
+          alt="LinkedIn"
+        >
       </a>
-      <a href="https://www.instagram.com/accidentalsweet/" target="_blank" rel="noopener noreferrer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      <a 
+        href="https://www.instagram.com/accidentalsweet/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" 
+          alt="Instagram"
+        >
       </a>
     </div>
     <a 
