@@ -120,6 +120,28 @@
       position: relative;
     }
 
+    /* Хлібні крихти */
+    .breadcrumbs {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 0.9rem;
+      color: #fff;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumbs a {
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumbs a:hover {
+      color: #ff006e;
+    }
+
     /* Кнопка портфоліо */
     .portfolio-button, .transparent-button {
       text-decoration: none;
@@ -195,6 +217,20 @@
     .cv-link:hover {
       color: #ff006e;
     }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      .portfolio-button, .transparent-button {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+      }
+      .breadcrumbs {
+        font-size: 0.8rem;
+        gap: 5px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -208,7 +244,7 @@
   </div>
 
   <div id="container" class="container">
-    <h1>Volo Lebid</h1>
+    <h1>Volo Lebid Portfolio</h1>
     <p class="description">
       Versatile marketer with achievements in FMCG, Media and Mobile
     </p>
