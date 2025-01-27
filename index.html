@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Improved Composition</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Improved Composition with Animation</title>
+  
+  <!-- Підключаємо шрифти Orbitron і Roboto -->
   <link 
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400&display=swap" 
     rel="stylesheet"
   >
+  
   <style>
+    /* Скидання базових відступів/паддингів */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    /* Базовий фон із градієнтом та анімацією */
     body {
       font-family: "Roboto", sans-serif;
+      /* Висота на всю сторінку для фону */
       min-height: 100vh;
+      /* Анімований градієнт */
       background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
@@ -28,8 +35,12 @@
       text-align: center;
       color: #fff;
       padding: 20px;
-      padding-bottom: calc(60px + env(safe-area-inset-bottom));
+      /* Для безпечного відступу знизу (на моб. з вирізом) */
+      padding-bottom: calc(60px + env(safe-area-inset-bottom)); 
       overflow-x: hidden;
+      /* В оригіналі був overflow: hidden; якщо потрібна прокрутка по Y, можна замінити */
+      overflow-y: auto;
+      position: relative; /* Для сітки */
     }
 
     @keyframes gradientBG {
@@ -38,6 +49,44 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* Додаємо сітку в перспективі */
+    .grid-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle, transparent, rgba(255, 255, 255, 0.1));
+      mask-image: linear-gradient(to top, transparent, black);
+      -webkit-mask-image: linear-gradient(to top, transparent, black);
+    }
+    .grid-background::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.2) 0px,
+        rgba(255, 255, 255, 0.2) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.2) 0px,
+        rgba(255, 255, 255, 0.2) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+      transform: translate(-50%, -50%) rotateX(60deg);
+      opacity: 0.5;
+    }
+
+    /* Хлібні крихти */
     .breadcrumbs {
       position: absolute;
       top: 20px;
@@ -47,48 +96,94 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-
     .breadcrumbs a {
       text-decoration: none;
       color: #fff;
       transition: color 0.3s ease;
     }
-
     .breadcrumbs a:hover {
       color: #ff006e;
     }
 
+    /* Контейнер із гіперпросторовою анімацією */
     .container {
       max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1;
+      margin-top: 80px; /* трішки відступу зверху */
+      animation: hyperspace-entry 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+    @keyframes hyperspace-entry {
+      0% {
+        transform: scale(0) translateY(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
     }
 
+    /* Анімація при виході */
+    .exit {
+      animation: hyperspace-exit 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+    @keyframes hyperspace-exit {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      30% {
+        transform: scale(1.2);
+      }
+      60% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0) translateY(-1000px);
+        opacity: 0;
+      }
+    }
+
+    /* Заголовок із плавним "підстрибуанням" */
     h1 {
       font-family: "Orbitron", sans-serif;
       font-size: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
       margin-bottom: 20px;
+      animation: floatText 2s ease-in-out infinite;
+    }
+    @keyframes floatText {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
+    /* Опис */
     p.description {
       font-size: 1.2rem;
       margin-bottom: 50px;
       line-height: 1.4;
     }
 
-    /* Кнопки */
+    /* Кнопки розміщені відносно низу сторінки */
     .buttons-wrapper {
       position: absolute;
-      bottom: 20%; /* Розташувати в нижній половині екрану */
+      bottom: 20%;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 20px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
+    /* Кнопки */
     .portfolio-button,
     .transparent-button {
       text-decoration: none;
@@ -101,29 +196,29 @@
       display: inline-block;
     }
 
+    /* Стиль для кнопки "See Portfolio" */
     .portfolio-button {
       background: rgba(255, 255, 255, 0.1);
       border-color: #ff006e;
       box-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e;
     }
-
     .portfolio-button:hover {
       background: #ff006e;
       color: #000;
       box-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493;
     }
 
+    /* Стиль для кнопки "Suggest Opportunity" */
     .transparent-button {
       background: transparent;
       border-color: #fff;
     }
-
     .transparent-button:hover {
       background: #fff;
       color: #000;
     }
 
-    /* Монетки */
+    /* Блок з монетами навколо кнопки "Suggest Opportunity" */
     .opportunity-wrapper {
       position: relative;
       display: inline-block;
@@ -131,80 +226,75 @@
 
     .coin-left, .coin-right {
       position: absolute;
-      top: 50%; /* Центрування по вертикалі */
+      top: 50%; 
       transform: translateY(-50%);
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
     }
-
     .coin-left {
-      left: -40px; /* Монета зліва */
+      left: -50px;
     }
-
     .coin-right {
-      right: -40px; /* Монета справа */
+      right: -50px;
     }
 
-    /* Логотипи і CV */
+    /* Соціальні іконки + CV */
     .social-section {
-      margin-top: -40px; /* Підняти, щоб уникнути перекриття інтерфейсом */
+      margin-top: -40px; 
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 20px;
     }
-
     .social-icons {
       display: flex;
       gap: 20px;
       margin-bottom: 15px;
     }
-
     .social-icons a {
       display: inline-block;
       width: 30px;
       height: 30px;
       transition: transform 0.3s ease;
     }
-
     .social-icons a:hover {
       transform: scale(1.2);
     }
-
     .social-icons img {
       width: 100%;
       height: 100%;
     }
 
+    /* Лінк на одно сторінкове CV */
     .cv-link {
-      font-size: 1.3rem; /* Збільшений розмір тексту */
+      font-size: 1.3rem;
       text-decoration: underline;
       color: #fff;
       transition: color 0.3s ease;
     }
-
     .cv-link:hover {
       color: #ff006e;
     }
 
+    /* Адаптив */
     @media (max-width: 768px) {
       h1 {
         font-size: 2rem;
+      }
+      .breadcrumbs {
+        font-size: 0.8rem;
+        gap: 5px;
       }
       .portfolio-button,
       .transparent-button {
         font-size: 1.2rem;
         padding: 10px 20px;
       }
-      .breadcrumbs {
-        font-size: 0.8rem;
-        gap: 5px;
-      }
       .coin-left {
-        left: -30px;
+        left: -35px;
       }
       .coin-right {
-        right: -30px;
+        right: -35px;
       }
     }
   </style>
@@ -219,6 +309,10 @@
   </noscript>
   <!-- End Google Tag Manager (noscript) -->
 
+  <!-- Сітка -->
+  <div class="grid-background"></div>
+
+  <!-- Хлібні крихти -->
   <div class="breadcrumbs">
     <a href="#">Product</a> / 
     <a href="#">Data Science</a> / 
@@ -227,6 +321,7 @@
     <a href="#">Creative</a>
   </div>
 
+  <!-- Основний контейнер -->
   <div id="container" class="container">
     <h1>Volo Lebid</h1>
     <p class="description">
@@ -234,15 +329,14 @@
     </p>
   </div>
 
-  <!-- Кнопки -->
+  <!-- Блок кнопок -->
   <div class="buttons-wrapper">
     <div class="opportunity-wrapper">
       <img src="coinn.gif" alt="Left Coin" class="coin-left">
       <a 
         class="transparent-button" 
-        href="https://lovelyswans.github.io/qanda/" 
-        target="_blank"
-        rel="noopener noreferrer"
+        href="https://lovelyswans.github.io/qanda/"
+        onclick="handleTransition(event, 'https://lovelyswans.github.io/qanda/')"
       >
         Suggest Opportunity
       </a>
@@ -250,18 +344,18 @@
     </div>
     <a 
       class="portfolio-button" 
-      href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
-      target="_blank"
-      rel="noopener noreferrer"
+      href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link"
+      onclick="handleTransition(event, 'https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link')"
     >
       See Portfolio
     </a>
   </div>
 
+  <!-- Соціальні іконки + лінк на CV -->
   <div class="social-section">
     <div class="social-icons">
       <a 
-        href="https://www.linkedin.com/in/volo42/" 
+        href="https://www.linkedin.com/in/volo42/"
         target="_blank" 
         rel="noopener noreferrer"
       >
@@ -290,5 +384,17 @@
       1 Page CV
     </a>
   </div>
+
+  <!-- Скрипт для плавного "виходу" при кліку -->
+  <script>
+    function handleTransition(event, url) {
+      event.preventDefault();
+      const container = document.getElementById('container');
+      container.classList.add('exit');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1200); // 1.2 секунди на анімацію
+    }
+  </script>
 </body>
 </html>
