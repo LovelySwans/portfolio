@@ -2,21 +2,28 @@
 <html lang="uk">
 <head>
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MT7MNXHD');</script>
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];
+      w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MT7MNXHD');
+  </script>
   <!-- End Google Tag Manager -->
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Volo Lebid Marketer's</title>
-  <!-- Підключення шрифту Orbitron (700) -->
+
+  <!-- Підключення шрифтів: Orbitron (700) для заголовків та Roboto (400) для текстів -->
   <link 
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" 
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400&display=swap" 
     rel="stylesheet"
   >
+
   <style>
     /* Скидання базових відступів/паддингів */
     * {
@@ -25,37 +32,35 @@
       box-sizing: border-box;
     }
 
+    /* Робимо Roboto шрифтом за замовчуванням для всієї сторінки */
     body {
-      font-family: "Orbitron", sans-serif;
+      font-family: "Roboto", sans-serif;
       min-height: 100vh;
+      /* Фоновий анімований градієнт */
       background: linear-gradient(-45deg, #070b34, #37005c, #0f045e, #29125e);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
+
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       align-items: center;
       text-align: center;
       color: #fff;
 
-      /* Відступи та безпечна зона знизу для мобільних браузерів */
+      /* Відступи для нижньої панелі браузера */
       padding: 20px;
       padding-bottom: 60px;
       padding-bottom: calc(60px + env(safe-area-inset-bottom));
 
+      /* Прибираємо overflow: hidden, 
+         щоб на малих екранах не обрізався низ */
       overflow-x: hidden;
     }
 
     @keyframes gradientBG {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     @keyframes hyperspaceEntry {
@@ -86,48 +91,11 @@
       }
     }
 
-    .container {
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1;
-      animation: hyperspaceEntry 2s ease;
-    }
-
-    .container.exit {
-      animation: hyperspaceExit 2s ease forwards;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      animation: floatText 2s ease-in-out infinite;
-    }
-
-    @keyframes floatText {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    p.description {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      line-height: 1.4;
-    }
-
     .breadcrumbs {
       position: absolute;
       top: 20px;
       left: 20px;
       font-size: 0.9rem;
-      color: #fff;
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -143,6 +111,40 @@
       color: #ff006e;
     }
 
+    .container {
+      max-width: 600px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: hyperspaceEntry 2s ease;
+    }
+
+    .container.exit {
+      animation: hyperspaceExit 2s ease forwards;
+    }
+
+    /* h1 – Orbitron */
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      animation: floatText 2s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    p.description {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+
     /* Кнопки */
     .portfolio-button,
     .transparent-button {
@@ -153,28 +155,13 @@
       border-radius: 8px;
       transition: all 0.3s ease;
       border: 2px solid transparent;
-      display: inline-flex;       /* щоб іконки були на одному рядку з текстом */
-      align-items: center;
-      justify-content: center;
-      gap: 8px;                   /* відстань між текстом і монетками */
-    }
-
-    .portfolio-button {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: #ff006e;
-      box-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e;
-    }
-
-    .portfolio-button:hover {
-      background: #ff006e;
-      color: #000;
-      box-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493;
+      display: inline-block;
+      margin-bottom: 20px; /* відступи між кнопками */
     }
 
     .transparent-button {
       background: transparent;
       border-color: #fff;
-      margin-top: 20px;
     }
 
     .transparent-button:hover {
@@ -182,10 +169,37 @@
       color: #000;
     }
 
-    /* Стили для монеток */
-    .coin-icon {
-      width: 24px;
-      height: 24px;
+    .portfolio-button {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #ff006e;
+      box-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e;
+    }
+    .portfolio-button:hover {
+      background: #ff006e;
+      color: #000;
+      box-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493;
+    }
+
+    /* Обгортка для монеток і кнопки "Suggest Opportunity" */
+    .opportunity-wrapper {
+      position: relative;
+      display: inline-block; /* щоб монетки вирівнювалися з кнопкою */
+    }
+
+    .coin-left, .coin-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+    }
+
+    .coin-left {
+      left: -40px; /* зсунемо монету лівіше за межі кнопки */
+    }
+
+    .coin-right {
+      right: -40px; /* зсунемо монету правіше за межі кнопки */
     }
 
     .social-section {
@@ -242,6 +256,12 @@
         font-size: 0.8rem;
         gap: 5px;
       }
+      .coin-left {
+        left: -30px;
+      }
+      .coin-right {
+        right: -30px;
+      }
     }
   </style>
 </head>
@@ -269,7 +289,22 @@
       Versatile marketer with success cases in Performance, Media and Mobile
     </p>
 
-    <!-- Кнопка "See Portfolio" -->
+    <!-- Спочатку "Suggest Opportunity" із монетками за межами кнопки -->
+    <div class="opportunity-wrapper">
+      <img src="coinn.gif" alt="Left Coin" class="coin-left">
+      <a 
+        class="transparent-button" 
+        href="https://lovelyswans.github.io/qanda/" 
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="handleTransition(event, 'https://lovelyswans.github.io/qanda/')"
+      >
+        Suggest Opportunity
+      </a>
+      <img src="coinn.gif" alt="Right Coin" class="coin-right">
+    </div>
+
+    <!-- Потім "See Portfolio" -->
     <a 
       class="portfolio-button" 
       href="https://drive.google.com/file/d/16VSnagdR5v8T6pSSuuNc5H89XmbdBRWN/view?usp=drive_link" 
@@ -279,21 +314,8 @@
     >
       See Portfolio
     </a>
-
-    <!-- Кнопка "Suggest Opportunity" з монетками -->
-    <a 
-      class="transparent-button" 
-      href="https://lovelyswans.github.io/qanda/" 
-      target="_blank"
-      rel="noopener noreferrer"
-      onclick="handleTransition(event, 'https://lovelyswans.github.io/qanda/')"
-    >
-      <img src="coinn.gif" alt="Coin" class="coin-icon">
-      Suggest Opportunity
-      <img src="coinn.gif" alt="Coin" class="coin-icon">
-    </a>
   </div>
-  
+
   <div class="social-section">
     <div class="social-icons">
       <a 
@@ -332,9 +354,10 @@
       event.preventDefault();
       const container = document.getElementById('container');
       container.classList.add('exit');
+      // Затримка 2 секунди, поки триває анімація exit
       setTimeout(() => {
         window.location.href = url;
-      }, 2000); // 2 seconds delay for the animation
+      }, 2000);
     }
   </script>
 </body>
